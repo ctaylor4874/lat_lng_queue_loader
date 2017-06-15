@@ -34,6 +34,7 @@ def index():
 
 @app.route('/handle_data', methods=['POST'])
 def handle_data():
+    lat_lng_queue = sqs.get_queue('lat_lng_queue')
     if request.method == 'POST':
         result = request.form
         data = get_data(result)
@@ -44,7 +45,6 @@ def handle_data():
 
 if __name__ == '__main__':
     logging.basicConfig(level=20, format='%(asctime)s:{}'.format(logging.BASIC_FORMAT))
-    lat_lng_queue = sqs.get_queue('lat_lng_queue')
     try:
         app.run(debug=False)
     except Exception as e:
