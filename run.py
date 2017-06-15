@@ -47,7 +47,7 @@ if __name__ == '__main__':
     logging.basicConfig(level=20, format='%(asctime)s:{}'.format(logging.BASIC_FORMAT))
     lat_lng_queue = sqs.get_queue(BOTO_QUEUE_NAME_LAT_LNG)
     try:
-        app.run(host='0.0.0.0', port=8080, debug=True)
+        app.run(debug=False)
     except Exception as e:
         logging.exception(e)
         raise
