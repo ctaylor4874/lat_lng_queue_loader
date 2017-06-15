@@ -6,8 +6,6 @@ from flask import Flask, render_template, request, redirect, url_for
 import sqs
 
 app = Flask(__name__)
-GOOGLE_API_KEY = os.getenv('GOOGLE_API_KEY')
-BOTO_QUEUE_NAME_LAT_LNG = 'lat_lng_queue'
 
 
 def send_message(queue, data):
