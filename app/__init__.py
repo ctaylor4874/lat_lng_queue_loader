@@ -45,7 +45,8 @@ def handle_data():
 
 if __name__ == '__main__':
     logging.basicConfig(level=20, format='%(asctime)s:{}'.format(logging.BASIC_FORMAT))
-    lat_lng_queue = sqs.get_queue(BOTO_QUEUE_NAME_LAT_LNG)
+    GOOGLE_API_KEY = os.getenv('GOOGLE_API_KEY')
+    lat_lng_queue = sqs.get_queue('lat_lng_queue')
     try:
         app.run(debug=False)
     except Exception as e:
