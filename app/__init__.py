@@ -6,6 +6,7 @@ from flask import Flask, render_template, request, redirect, url_for
 import sqs
 
 app = Flask(__name__)
+GOOGLE_API_KEY = os.getenv('GOOGLE_API_KEY')
 
 
 def send_message(queue, data):
@@ -43,7 +44,6 @@ def handle_data():
 
 if __name__ == '__main__':
     logging.basicConfig(level=20, format='%(asctime)s:{}'.format(logging.BASIC_FORMAT))
-    GOOGLE_API_KEY = os.getenv('GOOGLE_API_KEY')
     lat_lng_queue = sqs.get_queue('lat_lng_queue')
     try:
         app.run(debug=False)
