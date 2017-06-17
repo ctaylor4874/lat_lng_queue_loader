@@ -5,9 +5,10 @@ from flask import Flask, render_template, request, redirect, url_for, flash
 
 import sqs
 
-app = Flask(__name__)
 GOOGLE_API_KEY = os.getenv('GOOGLE_API_KEY')
 SECRET = os.getenv('QUEUE_LOADER_SECRET').encode()
+app = Flask(__name__)
+app.config['SECRET_KEY'] = bytes(SECRET)
 
 
 def send_message(queue, data):
@@ -53,7 +54,6 @@ def handle_data():
 if __name__ == '__main__':
     logging.basicConfig(level=20, format='%(asctime)s:{}'.format(logging.BASIC_FORMAT))
     try:
-        app.config['SECRET_KEY'] = bytes(SECRET)
         app.run(debug=False)
     except Exception as e:
         logging.exception(e)
